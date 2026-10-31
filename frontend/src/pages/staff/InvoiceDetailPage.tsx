@@ -165,7 +165,7 @@ export const InvoiceDetailPage: React.FC = () => {
             className="btn btn-secondary"
             onClick={() => window.print()}
           >
-            🖨 Print Invoice
+            Print Invoice
           </button>
           {allowed.includes('confirm') && (
             <button
@@ -182,7 +182,7 @@ export const InvoiceDetailPage: React.FC = () => {
               disabled={busy}
               onClick={handleSend}
             >
-              ✉ {inv.sentCount > 0 ? `Resend Email (${inv.sentCount})` : 'Send Email'}
+              {inv.sentCount > 0 ? `Resend Email (${inv.sentCount})` : 'Send Email'}
             </button>
           )}
           {allowed.includes('recordPayment') && (
@@ -193,7 +193,7 @@ export const InvoiceDetailPage: React.FC = () => {
                 setPayOpen(true);
               }}
             >
-              💳 Record Payment
+              Record Payment
             </button>
           )}
           {allowed.includes('cancel') && (
@@ -346,7 +346,7 @@ export const InvoiceDetailPage: React.FC = () => {
                       ? `-${formatPaise(l.discount.amount)} (${l.discount.name})`
                       : l.orderDiscountShare > 0
                       ? `-${formatPaise(l.orderDiscountShare)}`
-                      : '—'}
+                      : '-'}
                   </td>
                   <td>
                     {(l.taxes || []).map((t: any, i: number) => (
@@ -454,7 +454,7 @@ export const InvoiceDetailPage: React.FC = () => {
                     <td className="mono" style={{ fontWeight: 600, color: 'var(--success)' }}>
                       {formatPaise(p.amount)}
                     </td>
-                    <td>{p.note || '—'}</td>
+                    <td>{p.note || '-'}</td>
                     <td>{p.recordedBy?.name || 'Staff'}</td>
                   </tr>
                 ))}
@@ -467,7 +467,7 @@ export const InvoiceDetailPage: React.FC = () => {
       {/* Record Payment Modal */}
       <Modal
         open={payOpen}
-        title={`Record Payment — ${inv.number}`}
+        title={`Record Payment - ${inv.number}`}
         onClose={() => setPayOpen(false)}
       >
         <form onSubmit={handleRecordPayment}>
@@ -546,7 +546,7 @@ export const InvoiceDetailPage: React.FC = () => {
       {/* Cancel Invoice Modal */}
       <Modal
         open={cancelOpen}
-        title={`Cancel Invoice — ${inv.number}`}
+        title={`Cancel Invoice - ${inv.number}`}
         onClose={() => setCancelOpen(false)}
       >
         <form onSubmit={handleCancel}>

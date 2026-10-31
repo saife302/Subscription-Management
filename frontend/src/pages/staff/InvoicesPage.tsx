@@ -137,7 +137,7 @@ export const InvoicesPage: React.FC = () => {
                 className="btn btn-secondary"
                 onClick={() => handleBulkAction('send')}
               >
-                ✉ Send Selected ({selectedIds.length})
+                Send Selected ({selectedIds.length})
               </button>
             </>
           )}
@@ -267,7 +267,7 @@ export const InvoicesPage: React.FC = () => {
                         {inv.subscription.number}
                       </Link>
                     ) : (
-                      '—'
+                      '-'
                     )}
                   </td>
                   <td className="mono">{inv.invoiceDate}</td>

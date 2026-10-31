@@ -152,7 +152,7 @@ export const SubscriptionDetailPage: React.FC = () => {
               disabled={busy}
               onClick={() => runAction('send')}
             >
-              ✉ Send Quotation
+              Send Quotation
             </button>
           )}
           {allowed.includes('confirm') && (
@@ -256,10 +256,10 @@ export const SubscriptionDetailPage: React.FC = () => {
         <div className="kpi-card">
           <div className="kpi-label">Next Invoice Date</div>
           <div className="kpi-value mono" style={{ fontSize: '18px' }}>
-            {sub.nextInvoiceDate || '—'}
+            {sub.nextInvoiceDate || '-'}
           </div>
           <div className="kpi-sub">
-            Quotation Valid Until: {sub.quotationValidUntil || '—'}
+            Quotation Valid Until: {sub.quotationValidUntil || '-'}
           </div>
         </div>
 
@@ -332,12 +332,12 @@ export const SubscriptionDetailPage: React.FC = () => {
                   <td className="mono" style={{ color: 'var(--success)' }}>
                     {l.discount
                       ? `-${formatPaise(l.discount.amount)} (${l.discount.name})`
-                      : '—'}
+                      : '-'}
                   </td>
                   <td className="mono" style={{ color: 'var(--success)' }}>
                     {l.orderDiscountShare > 0
                       ? `-${formatPaise(l.orderDiscountShare)}`
-                      : '—'}
+                      : '-'}
                   </td>
                   <td>
                     {(l.taxes || []).map((tx: any) => (
@@ -409,9 +409,9 @@ export const SubscriptionDetailPage: React.FC = () => {
                     {h.action}
                   </td>
                   <td>
-                    {h.from || '—'} → <strong>{h.to || '—'}</strong>
+                    {h.from || '-'} → <strong>{h.to || '-'}</strong>
                   </td>
-                  <td>{h.note || '—'}</td>
+                  <td>{h.note || '-'}</td>
                 </tr>
               ))}
             </tbody>
@@ -422,7 +422,7 @@ export const SubscriptionDetailPage: React.FC = () => {
       {/* Edit Lines Modal */}
       <Modal
         open={editOpen}
-        title={`Edit Subscription — ${sub.number}`}
+        title={`Edit Subscription - ${sub.number}`}
         maxWidth="700px"
         onClose={() => setEditOpen(false)}
       >

@@ -42,30 +42,30 @@ export const StaffLoginPage: React.FC = () => {
     <div className="auth-wrapper">
       <div className="auth-card">
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-          <div className="brand-mark">S</div>
+          <div className="brand-mark">SN</div>
           <div>
-            <div style={{ fontWeight: 700, fontSize: '18px' }}>SubNex</div>
-            <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-              Staff Console (Admin • Staff • Finance)
+            <div style={{ fontWeight: 700, fontSize: '16px' }}>SubNex</div>
+            <div style={{ fontSize: '11.5px', color: 'var(--text-muted)' }}>
+              Internal Workspace
             </div>
           </div>
         </div>
 
-        <h2 style={{ margin: '0 0 6px', fontSize: '20px' }}>Staff Console Login</h2>
-        <p style={{ margin: '0 0 20px', color: 'var(--text-secondary)', fontSize: '13.5px' }}>
-          Sign in with your Admin, Internal Staff, or Finance Lead account.
+        <h2 style={{ margin: '0 0 6px', fontSize: '18px', fontWeight: 600 }}>Staff sign in</h2>
+        <p style={{ margin: '0 0 20px', color: 'var(--text-secondary)', fontSize: '13px' }}>
+          Sign in with your Administrator, Operations Staff, or Finance Lead credentials.
         </p>
 
         {error && <div className="alert alert-error">{error}</div>}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label className="form-label">Work Email</label>
+            <label className="form-label">Work email</label>
             <input
               type="email"
               className="form-input"
               required
-              placeholder="admin@brightloop.test"
+              placeholder="name@company.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -76,7 +76,7 @@ export const StaffLoginPage: React.FC = () => {
               <label className="form-label">Password</label>
               <Link
                 to="/staff/forgot-password"
-                style={{ fontSize: '12px', color: 'var(--primary)', textDecoration: 'none' }}
+                style={{ fontSize: '12px', color: 'var(--accent)', textDecoration: 'none' }}
               >
                 Forgot password?
               </Link>
@@ -97,7 +97,7 @@ export const StaffLoginPage: React.FC = () => {
             style={{ width: '100%', marginTop: '8px' }}
             disabled={submitting}
           >
-            {submitting ? 'Signing in...' : 'Sign in to Staff Console'}
+            {submitting ? 'Signing in...' : 'Sign in'}
           </button>
         </form>
 
@@ -110,7 +110,7 @@ export const StaffLoginPage: React.FC = () => {
             color: 'var(--text-secondary)',
           }}
         >
-          <div style={{ marginBottom: '8px', fontWeight: 600 }}>Seeded Staff Accounts:</div>
+          <div style={{ marginBottom: '8px', fontWeight: 600 }}>Demo Workspace Accounts:</div>
           <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
             <button
               type="button"
@@ -120,7 +120,7 @@ export const StaffLoginPage: React.FC = () => {
                 setPassword('Admin@2026!');
               }}
             >
-              Admin
+              Admin (Arjun)
             </button>
             <button
               type="button"
@@ -130,7 +130,7 @@ export const StaffLoginPage: React.FC = () => {
                 setPassword('Staff@2026!');
               }}
             >
-              Internal Staff (Riya)
+              Staff (Riya)
             </button>
             <button
               type="button"
@@ -140,7 +140,7 @@ export const StaffLoginPage: React.FC = () => {
                 setPassword('Finance@2026!');
               }}
             >
-              Finance Lead (Meera)
+              Finance (Meera)
             </button>
           </div>
         </div>
@@ -149,11 +149,11 @@ export const StaffLoginPage: React.FC = () => {
           style={{
             marginTop: '18px',
             textAlign: 'right',
-            fontSize: '13px',
+            fontSize: '12.5px',
           }}
         >
-          <Link to="/login" style={{ color: 'var(--text-muted)' }}>
-            ← Customer Portal Login
+          <Link to="/login" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>
+            Customer Portal Login
           </Link>
         </div>
       </div>

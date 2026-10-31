@@ -46,7 +46,7 @@ export const CustomerSignupPage: React.FC = () => {
     <div className="auth-wrapper">
       <div className="auth-card">
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-          <div className="brand-mark">S</div>
+          <div className="brand-mark">SN</div>
           <div>
             <div style={{ fontWeight: 700, fontSize: '18px' }}>SubNex</div>
             <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
@@ -135,10 +135,10 @@ export const CustomerSignupPage: React.FC = () => {
                 {rules.minLength ? '✓' : '○'} More than 8 characters (9 or more)
               </div>
               <div style={{ color: rules.hasUpper ? 'var(--success)' : 'var(--text-muted)' }}>
-                {rules.hasUpper ? '✓' : '○'} At least one uppercase letter (A–Z)
+                {rules.hasUpper ? '✓' : '○'} At least one uppercase letter (A-Z)
               </div>
               <div style={{ color: rules.hasLower ? 'var(--success)' : 'var(--text-muted)' }}>
-                {rules.hasLower ? '✓' : '○'} At least one lowercase letter (a–z)
+                {rules.hasLower ? '✓' : '○'} At least one lowercase letter (a-z)
               </div>
               <div style={{ color: rules.hasSpecial ? 'var(--success)' : 'var(--text-muted)' }}>
                 {rules.hasSpecial ? '✓' : '○'} At least one special character (!@#$...)

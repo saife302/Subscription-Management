@@ -1,4 +1,4 @@
-﻿const app = require('./app.js');
+const app = require('./app.js');
 const config = require('./config/index.js');
 const db = require('./database/db.js');
 const { startNightlyBillingJob } = require('./jobs/billing.job.js');
@@ -13,7 +13,7 @@ async function startServer() {
     const port = config.port;
     app.listen(port, () => {
       console.log(
-        `[Server] Brightloop API listening on http://localhost:${port}/api/v1`
+        `[Server] SubNex API listening on http://localhost:${port}/api/v1`
       );
     });
   } catch (err) {

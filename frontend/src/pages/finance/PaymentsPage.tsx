@@ -225,7 +225,7 @@ export const PaymentsPage: React.FC = () => {
                   <td className="mono" style={{ fontWeight: 700, color: 'var(--success)' }}>
                     {formatPaise(p.amount)}
                   </td>
-                  <td>{p.note || '—'}</td>
+                  <td>{p.note || '-'}</td>
                   <td>{p.recordedBy?.name || 'Staff'}</td>
                   {isAdmin && (
                     <td>
@@ -275,7 +275,7 @@ export const PaymentsPage: React.FC = () => {
             >
               {confirmedInvoices.map((inv) => (
                 <option key={inv.id} value={inv.id}>
-                  {inv.number} — {inv.customer?.name} (Balance: {formatPaise(inv.balance)})
+                  {inv.number} - {inv.customer?.name} (Balance: {formatPaise(inv.balance)})
                 </option>
               ))}
             </select>

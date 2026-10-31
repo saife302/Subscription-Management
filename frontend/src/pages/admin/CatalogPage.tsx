@@ -255,7 +255,7 @@ export const CatalogPage: React.FC = () => {
     <div>
       <div className="page-header">
         <div>
-          <h1 className="page-title">Catalog — Products, Plans & Templates</h1>
+          <h1 className="page-title">Catalog - Products, Plans & Templates</h1>
           <p className="page-subtitle">
             Recurring plans, product variants, and pre-built quotation templates
           </p>
@@ -474,7 +474,7 @@ export const CatalogPage: React.FC = () => {
       {/* Product Modal */}
       <Modal
         open={prodModalOpen}
-        title={editingProd ? `Edit Product — ${editingProd.name}` : 'Create Product'}
+        title={editingProd ? `Edit Product - ${editingProd.name}` : 'Create Product'}
         onClose={() => setProdModalOpen(false)}
       >
         <form onSubmit={handleSaveProduct}>
@@ -785,7 +785,7 @@ export const CatalogPage: React.FC = () => {
                 required
                 value={tplName}
                 onChange={(e) => setTplName(e.target.value)}
-                placeholder="Pro Yearly – Enterprise"
+                placeholder="Pro Yearly - Enterprise"
               />
             </div>
             <div className="form-group">

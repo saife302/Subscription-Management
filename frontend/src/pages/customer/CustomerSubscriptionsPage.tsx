@@ -53,7 +53,7 @@ export const CustomerSubscriptionsPage: React.FC = () => {
     setActionMsg('');
     try {
       await apiRequest(`/portal/subscriptions/${id}/${action}`, { method: 'POST' });
-      setActionMsg(`Action '${action}' completed successfully.`);
+      setActionMsg(`Subscription action '${action}' completed.`);
       await loadList();
       if (selectedId === id) {
         await loadDetail(id);
@@ -67,9 +67,9 @@ export const CustomerSubscriptionsPage: React.FC = () => {
     <div>
       <div className="page-header">
         <div>
-          <h1 className="page-title">My Subscriptions</h1>
+          <h1 className="page-title">Subscriptions</h1>
           <p className="page-subtitle">
-            View your active plans, quotations, and manage subscription lifecycle
+            View your active plans, quotations, and renewal schedule
           </p>
         </div>
       </div>
@@ -111,7 +111,7 @@ export const CustomerSubscriptionsPage: React.FC = () => {
                     <td className="mono" style={{ fontWeight: 600 }}>
                       {sub.number}
                     </td>
-                    <td>{sub.plan?.name || '—'}</td>
+                    <td>{sub.plan?.name || '-'}</td>
                     <td>
                       <StatusBadge status={sub.status} />
                     </td>
@@ -190,7 +190,7 @@ export const CustomerSubscriptionsPage: React.FC = () => {
               <div>
                 <div style={{ color: 'var(--text-secondary)' }}>Term</div>
                 <div style={{ fontWeight: 600 }}>
-                  {formatDate(detail.startDate)} → {formatDate(detail.expiryDate)}
+                  {formatDate(detail.startDate)} to {formatDate(detail.expiryDate)}
                 </div>
               </div>
             </div>
@@ -217,9 +217,9 @@ export const CustomerSubscriptionsPage: React.FC = () => {
                           </div>
                         )}
                       </td>
-                      <td>{l.quantity}</td>
+                      <td className="mono">{l.quantity}</td>
                       <td className="mono">{formatPaise(l.unitPrice)}</td>
-                      <td>{l.tax ? `${l.tax.name} (${formatBps(l.tax.rateBps)})` : '—'}</td>
+                      <td>{l.tax ? `${l.tax.name} (${formatBps(l.tax.rateBps)})` : '-'}</td>
                       <td className="mono" style={{ fontWeight: 600 }}>
                         {formatPaise(l.lineTotal)}
                       </td>

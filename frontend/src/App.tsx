@@ -73,13 +73,13 @@ export const App: React.FC = () => {
           {/* Customer Auth Routes */}
           <Route path="/login" element={<CustomerLoginPage />} />
           <Route path="/signup" element={<CustomerSignupPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage isStaff={false} />} />
-          <Route path="/reset-password" element={<ResetPasswordPage isStaff={false} />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage portal="customer" />} />
+          <Route path="/reset-password" element={<ResetPasswordPage portal="customer" />} />
 
           {/* Staff Auth Routes */}
           <Route path="/staff/login" element={<StaffLoginPage />} />
-          <Route path="/staff/forgot-password" element={<ForgotPasswordPage isStaff={true} />} />
-          <Route path="/staff/reset-password" element={<ResetPasswordPage isStaff={true} />} />
+          <Route path="/staff/forgot-password" element={<ForgotPasswordPage portal="staff" />} />
+          <Route path="/staff/reset-password" element={<ResetPasswordPage portal="staff" />} />
           <Route path="/staff/set-password" element={<ForceChangePasswordPage />} />
 
           {/* Customer Portal Routes */}

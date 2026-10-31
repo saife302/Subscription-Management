@@ -33,7 +33,7 @@ export const CustomerPortalDashboard: React.FC = () => {
       await apiRequest(`/portal/subscriptions/${id}/${action}`, { method: 'POST' });
       setActionMsg(
         action === 'accept'
-          ? 'Quotation accepted! Your subscription is now confirmed.'
+          ? 'Quotation accepted. Your subscription is now confirmed.'
           : 'Quotation declined.'
       );
       loadData();
@@ -42,7 +42,7 @@ export const CustomerPortalDashboard: React.FC = () => {
     }
   };
 
-  if (loading) return <div className="empty-state">Loading your SubNex portal...</div>;
+  if (loading) return <div className="empty-state">Loading account overview...</div>;
 
   const pendingQuotations: any[] = Array.isArray(summary?.pendingQuotations)
     ? summary.pendingQuotations
@@ -52,9 +52,9 @@ export const CustomerPortalDashboard: React.FC = () => {
     <div>
       <div className="page-header">
         <div>
-          <h1 className="page-title">Welcome to SubNex Portal</h1>
+          <h1 className="page-title">Account Overview</h1>
           <p className="page-subtitle">
-            Manage your subscriptions, review quotations, and download GST invoices
+            Manage your active subscriptions, review quotations, and pay GST invoices
           </p>
         </div>
       </div>
@@ -67,18 +67,18 @@ export const CustomerPortalDashboard: React.FC = () => {
           <div className="kpi-label">Active Subscriptions</div>
           <div className="kpi-value">{summary?.activeSubscriptions ?? 0}</div>
           <div className="kpi-sub">
-            <Link to="/portal/subscriptions">Manage subscriptions →</Link>
+            <Link to="/portal/subscriptions">View subscriptions</Link>
           </div>
         </div>
         <div className="kpi-card">
-          <div className="kpi-label">Pending Quotations</div>
+          <div className="kpi-label">Open Quotations</div>
           <div
             className="kpi-value"
             style={{ color: pendingQuotations.length > 0 ? 'var(--warning)' : undefined }}
           >
             {pendingQuotations.length}
           </div>
-          <div className="kpi-sub">Awaiting your review</div>
+          <div className="kpi-sub">Awaiting approval</div>
         </div>
         <div className="kpi-card">
           <div className="kpi-label">Outstanding Balance</div>
@@ -90,26 +90,32 @@ export const CustomerPortalDashboard: React.FC = () => {
           >
             {formatPaise(summary?.outstandingAmount ?? 0)}
           </div>
-          <div className="kpi-sub">{summary?.overdueCount ?? 0} overdue invoice(s)</div>
+          <div className="kpi-sub">
+            {(summary?.outstandingAmount ?? 0) > 0 ? (
+              <Link to="/portal/invoices">Pay open invoices ({summary?.overdueCount ?? 0} overdue)</Link>
+            ) : (
+              'All invoices paid'
+            )}
+          </div>
         </div>
         <div className="kpi-card">
-          <div className="kpi-label">Next Scheduled Billing</div>
+          <div className="kpi-label">Next Scheduled Renewal</div>
           <div className="kpi-value mono" style={{ fontSize: 18 }}>
-            {summary?.nextInvoice ? formatPaise(summary.nextInvoice.amount) : 'No upcoming billing'}
+            {summary?.nextInvoice ? formatPaise(summary.nextInvoice.amount) : 'None scheduled'}
           </div>
           <div className="kpi-sub">
             {summary?.nextInvoice
-              ? `${summary.nextInvoice.subscriptionNumber} • ${formatDate(summary.nextInvoice.date)}`
-              : 'All caught up'}
+              ? `${summary.nextInvoice.subscriptionNumber} on ${formatDate(summary.nextInvoice.date)}`
+              : 'No upcoming renewal'}
           </div>
         </div>
       </div>
 
       {pendingQuotations.length > 0 && (
         <div className="card" style={{ marginBottom: 24, borderColor: '#fde68a' }}>
-          <div className="card-header" style={{ background: '#fffbeb' }}>
+          <div className="card-header" style={{ background: '#fffbeb', margin: '-20px -20px 16px', padding: '12px 20px', borderBottom: '1px solid #fde68a', borderRadius: '8px 8px 0 0' }}>
             <h3 className="card-title" style={{ color: '#b45309' }}>
-              Pending Quotations — Action Required
+              Quotations Requiring Approval
             </h3>
           </div>
           <div className="table-wrap">
@@ -146,7 +152,7 @@ export const CustomerPortalDashboard: React.FC = () => {
                           className="btn btn-sm btn-danger"
                           onClick={() => handleQuoteAction(q.id, 'reject')}
                         >
-                          Reject
+                          Decline
                         </button>
                       </div>
                     </td>
@@ -161,32 +167,32 @@ export const CustomerPortalDashboard: React.FC = () => {
       <div className="grid-2">
         <div className="card">
           <div className="card-header">
-            <h3 className="card-title">Quick Links</h3>
+            <h3 className="card-title">Billing Shortcuts</h3>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <Link
-              to="/portal/subscriptions"
-              className="btn btn-secondary"
-              style={{ justifyContent: 'space-between' }}
-            >
-              <span>View My Subscriptions & Quotations</span>
-              <span>→</span>
-            </Link>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <Link
               to="/portal/invoices"
               className="btn btn-secondary"
               style={{ justifyContent: 'space-between' }}
             >
-              <span>View & Print Tax Invoices</span>
-              <span>→</span>
+              <span>Pay Open Invoices &amp; Download Tax Receipts</span>
+              <span>View</span>
+            </Link>
+            <Link
+              to="/portal/subscriptions"
+              className="btn btn-secondary"
+              style={{ justifyContent: 'space-between' }}
+            >
+              <span>Review Active Subscriptions &amp; Quotations</span>
+              <span>View</span>
             </Link>
             <Link
               to="/portal/profile"
               className="btn btn-secondary"
               style={{ justifyContent: 'space-between' }}
             >
-              <span>Update Profile & Password</span>
-              <span>→</span>
+              <span>Manage Billing Profile &amp; Password</span>
+              <span>Edit</span>
             </Link>
           </div>
         </div>
@@ -194,7 +200,7 @@ export const CustomerPortalDashboard: React.FC = () => {
         {summary?.nextInvoice && (
           <div className="card">
             <div className="card-header">
-              <h3 className="card-title">Next Scheduled Renewal Invoice</h3>
+              <h3 className="card-title">Next Scheduled Billing</h3>
               <StatusBadge status="active" />
             </div>
             <div>
@@ -208,11 +214,11 @@ export const CustomerPortalDashboard: React.FC = () => {
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
                 <span style={{ color: 'var(--text-secondary)' }}>Recurring Amount</span>
-                <strong className="mono" style={{ fontSize: 18, color: 'var(--primary)' }}>
+                <strong className="mono" style={{ fontSize: 18 }}>
                   {formatPaise(summary.nextInvoice.amount)}
                 </strong>
               </div>
-              <Link to="/portal/subscriptions" className="btn btn-primary btn-sm">
+              <Link to="/portal/subscriptions" className="btn btn-secondary btn-sm">
                 View Subscription Details
               </Link>
             </div>

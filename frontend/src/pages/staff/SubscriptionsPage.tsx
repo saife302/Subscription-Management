@@ -294,7 +294,7 @@ export const SubscriptionsPage: React.FC = () => {
                   </td>
                   <td className="mono">{s.startDate}</td>
                   <td className="mono">{s.expiryDate}</td>
-                  <td className="mono">{s.nextInvoiceDate || '—'}</td>
+                  <td className="mono">{s.nextInvoiceDate || '-'}</td>
                   <td className="mono" style={{ fontWeight: 600 }}>
                     {formatPaise(s.recurringTotal)}
                   </td>
@@ -323,7 +323,7 @@ export const SubscriptionsPage: React.FC = () => {
       {/* Quote Builder Modal with Live Preview */}
       <Modal
         open={builderOpen}
-        title="Quote Builder — Create Subscription Draft"
+        title="Quote Builder - Create Subscription Draft"
         maxWidth="840px"
         onClose={() => setBuilderOpen(false)}
       >
@@ -354,7 +354,7 @@ export const SubscriptionsPage: React.FC = () => {
                 value={templateId}
                 onChange={(e) => handleSelectTemplate(e.target.value)}
               >
-                <option value="">— Build from Scratch —</option>
+                <option value="">- Build from Scratch -</option>
                 {templates.map((t) => (
                   <option key={t.id} value={t.id}>
                     {t.name}
@@ -565,7 +565,7 @@ export const SubscriptionsPage: React.FC = () => {
                           ? `-${formatPaise(pl.discount.amount)} (${pl.discount.name})`
                           : pl.orderDiscountShare > 0
                           ? `-${formatPaise(pl.orderDiscountShare)} (Order share)`
-                          : '—'}
+                          : '-'}
                       </td>
                       <td className="mono">{formatPaise(pl.taxAmount)}</td>
                       <td className="mono" style={{ fontWeight: 600 }}>

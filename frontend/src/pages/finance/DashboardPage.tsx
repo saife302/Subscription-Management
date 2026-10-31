@@ -99,7 +99,7 @@ export const DashboardPage: React.FC = () => {
               downloadCsvWithAuth('/reports/export?type=invoices', 'subnex-invoices.csv')
             }
           >
-            ⬇ Export Invoices CSV
+            Export Invoices CSV
           </button>
           <button
             className="btn btn-secondary btn-sm"
@@ -107,7 +107,7 @@ export const DashboardPage: React.FC = () => {
               downloadCsvWithAuth('/reports/export?type=payments', 'subnex-payments.csv')
             }
           >
-            ⬇ Export Payments CSV
+            Export Payments CSV
           </button>
           <button
             className="btn btn-secondary btn-sm"
@@ -118,7 +118,7 @@ export const DashboardPage: React.FC = () => {
               )
             }
           >
-            ⬇ Export Subscriptions CSV
+            Export Subscriptions CSV
           </button>
         </div>
       </div>
@@ -177,7 +177,7 @@ export const DashboardPage: React.FC = () => {
       <div className="kpi-grid">
         <div className="kpi-card">
           <div className="kpi-label">Active Subscriptions</div>
-          <div className="kpi-value">{summary?.activeSubscriptions ?? '—'}</div>
+          <div className="kpi-value">{summary?.activeSubscriptions ?? '-'}</div>
           <div className="kpi-sub">
             +{summary?.newSubscriptions ?? 0} new • {summary?.closedSubscriptions ?? 0} closed in period
           </div>
@@ -381,7 +381,7 @@ export const DashboardPage: React.FC = () => {
                         className="btn btn-secondary btn-sm"
                         onClick={() => handleSendOverdueReminder(inv)}
                       >
-                        ✉ Remind
+                        Remind
                       </button>
                     </td>
                   </tr>

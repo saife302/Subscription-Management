@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const db = require('../../database/db.js');
 const config = require('../../config/index.js');
 const { authenticate, requireRole } = require('../../middleware/auth.js');

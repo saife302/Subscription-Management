@@ -35,19 +35,19 @@ export const ForgotPasswordPage: React.FC<{ portal: 'customer' | 'staff' }> = ({
   return (
     <div className="auth-wrapper">
       <div className="auth-card">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-          <div className="brand-mark">S</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+          <div className="brand-mark">SN</div>
           <div>
-            <div style={{ fontWeight: 700, fontSize: '18px' }}>SubNex</div>
-            <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+            <div style={{ fontWeight: 700, fontSize: '16px' }}>SubNex</div>
+            <div style={{ fontSize: '11.5px', color: 'var(--text-muted)' }}>
               {portal === 'staff' ? 'Staff Password Recovery' : 'Customer Password Recovery'}
             </div>
           </div>
         </div>
 
-        <h2 style={{ margin: '0 0 6px', fontSize: '20px' }}>Forgot your password?</h2>
-        <p style={{ margin: '0 0 18px', color: 'var(--text-secondary)', fontSize: '13.5px' }}>
-          Enter your email address and we will send a 30-minute reset link via Brevo.
+        <h2 style={{ margin: '0 0 6px', fontSize: '18px', fontWeight: 600 }}>Reset your password</h2>
+        <p style={{ margin: '0 0 18px', color: 'var(--text-secondary)', fontSize: '13px' }}>
+          Enter your email address and we will send a 30-minute password reset link.
         </p>
 
         {sent && (
@@ -57,8 +57,8 @@ export const ForgotPasswordPage: React.FC<{ portal: 'customer' | 'staff' }> = ({
             </div>
             {devResetUrl && (
               <div style={{ marginTop: '8px', wordBreak: 'break-all' }}>
-                <strong>Dev Mode Reset Link:</strong>{' '}
-                <a href={devResetUrl} style={{ color: 'var(--primary)' }}>
+                <strong>Reset Link:</strong>{' '}
+                <a href={devResetUrl} style={{ color: 'var(--accent)' }}>
                   {devResetUrl}
                 </a>
               </div>
@@ -75,7 +75,7 @@ export const ForgotPasswordPage: React.FC<{ portal: 'customer' | 'staff' }> = ({
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder={portal === 'staff' ? 'meera@brightloop.test' : 'asha@kite.test'}
+              placeholder={portal === 'staff' ? 'name@company.com' : 'billing@company.com'}
             />
           </div>
 
@@ -85,13 +85,13 @@ export const ForgotPasswordPage: React.FC<{ portal: 'customer' | 'staff' }> = ({
             style={{ width: '100%' }}
             disabled={submitting}
           >
-            {submitting ? 'Sending reset link...' : 'Send reset link'}
+            {submitting ? 'Sending link...' : 'Send reset link'}
           </button>
         </form>
 
         <div style={{ marginTop: '16px', textAlign: 'center', fontSize: '13px' }}>
-          <Link to={backLoginPath} style={{ color: 'var(--primary)', fontWeight: 600 }}>
-            ← Back to Sign in
+          <Link to={backLoginPath} style={{ color: 'var(--text-secondary)', fontWeight: 500, textDecoration: 'none' }}>
+            Back to Sign in
           </Link>
         </div>
       </div>

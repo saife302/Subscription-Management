@@ -4,8 +4,10 @@ import { apiRequest } from '../../services/api';
 import { formatPaise, formatDate, formatBps } from '../../utils/format';
 import { StatusBadge } from '../../components/StatusBadge';
 import { Modal } from '../../components/Modal';
+import { useAuth } from '../../hooks/useAuth';
 
 export const CustomerInvoicesPage: React.FC = () => {
+  const { user, meta } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedId = searchParams.get('id');
 
@@ -51,9 +53,9 @@ export const CustomerInvoicesPage: React.FC = () => {
     <div>
       <div className="page-header">
         <div>
-          <h1 className="page-title">My Invoices</h1>
+          <h1 className="page-title">Invoices</h1>
           <p className="page-subtitle">
-            View and print your official SubNex tax invoices and payment history
+            View and print your GST tax invoices and payment history
           </p>
         </div>
       </div>
@@ -146,19 +148,24 @@ export const CustomerInvoicesPage: React.FC = () => {
               style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: 16,
+                alignItems: 'flex-start',
+                marginBottom: 20,
+                paddingBottom: 16,
+                borderBottom: '1px solid var(--border)',
               }}
             >
               <div>
-                <div style={{ fontWeight: 800, fontSize: 18, color: 'var(--primary)' }}>
-                  SubNex
+                <div style={{ fontWeight: 700, fontSize: 18, color: 'var(--text)' }}>
+                  {meta?.company?.name || 'SubNex'}
                 </div>
-                <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
-                  Subscription & Billing Management
+                <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 2 }}>
+                  {meta?.company?.address || '100 Residency Road, Bengaluru, Karnataka 560025'}
+                </div>
+                <div className="mono" style={{ fontSize: 11.5, color: 'var(--text-muted)', marginTop: 2 }}>
+                  GSTIN: {meta?.company?.taxId || '29AABCB1234F1Z5'}
                 </div>
               </div>
-              <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+              <div className="no-print" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                 <StatusBadge status={detail.status} />
                 <button className="btn btn-sm btn-primary" onClick={() => window.print()}>
                   Print / Save PDF
@@ -166,14 +173,36 @@ export const CustomerInvoicesPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="grid-2" style={{ marginBottom: 16, fontSize: 13 }}>
+            <div className="grid-2" style={{ marginBottom: 18, fontSize: 12.5 }}>
               <div>
-                <div style={{ color: 'var(--text-secondary)' }}>Invoice Date</div>
-                <div style={{ fontWeight: 600 }}>{formatDate(detail.invoiceDate)}</div>
+                <div style={{ color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', fontSize: 11 }}>
+                  Billed To
+                </div>
+                <div style={{ fontWeight: 600, marginTop: 3 }}>
+                  {detail.customerSnapshot?.company || detail.customerSnapshot?.name || user?.name}
+                </div>
+                {detail.customerSnapshot?.email && (
+                  <div style={{ color: 'var(--text-secondary)' }}>{detail.customerSnapshot.email}</div>
+                )}
+                {detail.customerSnapshot?.taxId && (
+                  <div className="mono" style={{ fontSize: 11.5, color: 'var(--text-muted)', marginTop: 2 }}>
+                    GSTIN: {detail.customerSnapshot.taxId}
+                  </div>
+                )}
               </div>
-              <div>
-                <div style={{ color: 'var(--text-secondary)' }}>Due Date</div>
-                <div style={{ fontWeight: 600 }}>{formatDate(detail.dueDate)}</div>
+              <div style={{ textAlign: 'right' }}>
+                <div style={{ marginBottom: 4 }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Invoice Number: </span>
+                  <strong className="mono">{detail.number}</strong>
+                </div>
+                <div style={{ marginBottom: 4 }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Invoice Date: </span>
+                  <strong>{formatDate(detail.invoiceDate)}</strong>
+                </div>
+                <div>
+                  <span style={{ color: 'var(--text-muted)' }}>Due Date: </span>
+                  <strong>{formatDate(detail.dueDate)}</strong>
+                </div>
               </div>
             </div>
 
@@ -192,12 +221,12 @@ export const CustomerInvoicesPage: React.FC = () => {
                   {(detail.lines || []).map((l: any) => (
                     <tr key={l.id}>
                       <td>{l.description}</td>
-                      <td>{l.quantity}</td>
+                      <td className="mono">{l.quantity}</td>
                       <td className="mono">{formatPaise(l.unitPrice)}</td>
                       <td>
                         {l.taxSnapshot
                           ? `${l.taxSnapshot.name} (${formatBps(l.taxSnapshot.rateBps)})`
-                          : '—'}
+                          : '-'}
                       </td>
                       <td className="mono" style={{ fontWeight: 600 }}>
                         {formatPaise(l.lineTotal)}
@@ -269,7 +298,7 @@ export const CustomerInvoicesPage: React.FC = () => {
 
             {(detail.payments || []).length > 0 && (
               <div style={{ marginTop: 16 }}>
-                <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 8 }}>
+                <div style={{ fontWeight: 600, fontSize: 12.5, marginBottom: 8 }}>
                   Payments Recorded
                 </div>
                 {detail.payments.map((p: any) => (
@@ -285,7 +314,7 @@ export const CustomerInvoicesPage: React.FC = () => {
                   >
                     <span>
                       {formatDate(p.paymentDate)} • {p.method.replace('_', ' ').toUpperCase()}{' '}
-                      {p.reference ? `(${p.reference})` : ''}
+                      {p.note ? `(${p.note})` : ''}
                     </span>
                     <strong className="mono" style={{ color: 'var(--success)' }}>
                       {formatPaise(p.amount)}

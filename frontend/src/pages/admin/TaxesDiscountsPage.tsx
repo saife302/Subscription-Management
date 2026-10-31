@@ -321,7 +321,7 @@ export const TaxesDiscountsPage: React.FC = () => {
             </div>
             <div className="form-group">
               <label className="form-label">
-                {discType === 'percentage' ? 'Percentage (0–100) *' : 'Fixed Amount (₹) *'}
+                {discType === 'percentage' ? 'Percentage (0-100) *' : 'Fixed Amount (₹) *'}
               </label>
               <input
                 type="number"

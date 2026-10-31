@@ -1,4 +1,4 @@
-﻿const path = require('path');
+const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 process.env.TZ = process.env.TZ || 'Asia/Kolkata';
@@ -48,7 +48,16 @@ const config = {
     return process.env.BREVO_SENDER_EMAIL || 'noreply@brightloop.test';
   },
   get brevoSenderName() {
-    return process.env.BREVO_SENDER_NAME || 'Brightloop';
+    return process.env.BREVO_SENDER_NAME || 'SubNex';
+  },
+  get brevoSmtpLogin() {
+    return process.env.BREVO_SMTP_LOGIN || process.env.BREVO_SMTP_USER || '';
+  },
+  get razorpayKeyId() {
+    return process.env.RAZORPAY_KEY_ID || '';
+  },
+  get razorpayKeySecret() {
+    return process.env.RAZORPAY_KEY_SECRET || '';
   },
   get brevoTemplateResetId() {
     const val = process.env.BREVO_TEMPLATE_RESET_ID;

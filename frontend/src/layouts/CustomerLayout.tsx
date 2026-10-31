@@ -16,10 +16,10 @@ export const CustomerLayout: React.FC = () => {
       <header className="customer-header">
         <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div className="brand-mark">S</div>
+            <div className="brand-mark">SN</div>
             <div>
               <div className="brand-title">SubNex</div>
-              <div className="brand-subtitle">Customer Portal</div>
+              <div className="brand-subtitle">Customer Billing Portal</div>
             </div>
           </div>
 
@@ -39,7 +39,7 @@ export const CustomerLayout: React.FC = () => {
                 `nav-link ${isActive ? 'active' : ''}`
               }
             >
-              My Subscriptions
+              Subscriptions
             </NavLink>
             <NavLink
               to="/portal/invoices"
@@ -47,7 +47,7 @@ export const CustomerLayout: React.FC = () => {
                 `nav-link ${isActive ? 'active' : ''}`
               }
             >
-              My Invoices
+              Invoices &amp; Payments
             </NavLink>
             <NavLink
               to="/portal/profile"
@@ -55,15 +55,15 @@ export const CustomerLayout: React.FC = () => {
                 `nav-link ${isActive ? 'active' : ''}`
               }
             >
-              Profile & Security
+              Account Settings
             </NavLink>
           </nav>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '13px', fontWeight: 600 }}>{user?.name}</div>
-            <div style={{ fontSize: '11px', color: '#94a3b8' }}>
+            <div style={{ fontSize: '12.5px', fontWeight: 600 }}>{user?.name}</div>
+            <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
               {user?.customer?.name || user?.email}
             </div>
           </div>

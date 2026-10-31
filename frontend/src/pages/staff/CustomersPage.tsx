@@ -210,11 +210,11 @@ export const CustomersPage: React.FC = () => {
                       {c.email}
                     </div>
                     <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-                      {c.phone || '—'}
+                      {c.phone || '-'}
                     </div>
                   </td>
                   <td>
-                    <div>{c.billingAddress?.city || '—'}</div>
+                    <div>{c.billingAddress?.city || '-'}</div>
                     <div className="mono" style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
                       {c.taxId || ''}
                     </div>
@@ -276,7 +276,7 @@ export const CustomersPage: React.FC = () => {
 
       <Modal
         open={modalOpen}
-        title={editingCust ? `Edit Customer — ${editingCust.name}` : 'Create Customer'}
+        title={editingCust ? `Edit Customer - ${editingCust.name}` : 'Create Customer'}
         onClose={() => setModalOpen(false)}
       >
         <form onSubmit={handleSave}>

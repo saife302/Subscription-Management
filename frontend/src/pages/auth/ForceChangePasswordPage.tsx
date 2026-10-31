@@ -45,7 +45,7 @@ export const ForceChangePasswordPage: React.FC = () => {
     <div className="auth-wrapper">
       <div className="auth-card">
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-          <div className="brand-mark">S</div>
+          <div className="brand-mark">SN</div>
           <div>
             <div style={{ fontWeight: 700, fontSize: '18px' }}>SubNex</div>
             <div style={{ fontSize: '12px', color: 'var(--warning)' }}>

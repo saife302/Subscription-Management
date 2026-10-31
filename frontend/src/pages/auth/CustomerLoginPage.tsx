@@ -37,18 +37,18 @@ export const CustomerLoginPage: React.FC = () => {
     <div className="auth-wrapper">
       <div className="auth-card">
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-          <div className="brand-mark">S</div>
+          <div className="brand-mark">SN</div>
           <div>
-            <div style={{ fontWeight: 700, fontSize: '18px' }}>SubNex</div>
-            <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-              Customer Portal Sign In
+            <div style={{ fontWeight: 700, fontSize: '16px' }}>SubNex</div>
+            <div style={{ fontSize: '11.5px', color: 'var(--text-muted)' }}>
+              Customer Billing Portal
             </div>
           </div>
         </div>
 
-        <h2 style={{ margin: '0 0 6px', fontSize: '20px' }}>Welcome back</h2>
-        <p style={{ margin: '0 0 20px', color: 'var(--text-secondary)', fontSize: '13.5px' }}>
-          Sign in to view your subscriptions, quotations, and invoices.
+        <h2 style={{ margin: '0 0 6px', fontSize: '18px', fontWeight: 600 }}>Sign in to your account</h2>
+        <p style={{ margin: '0 0 20px', color: 'var(--text-secondary)', fontSize: '13px' }}>
+          View your subscriptions, review quotations, and download GST invoices.
         </p>
 
         {error && <div className="alert alert-error">{error}</div>}
@@ -60,7 +60,7 @@ export const CustomerLoginPage: React.FC = () => {
               type="email"
               className="form-input"
               required
-              placeholder="billing@acme.test"
+              placeholder="billing@company.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -71,7 +71,7 @@ export const CustomerLoginPage: React.FC = () => {
               <label className="form-label">Password</label>
               <Link
                 to="/forgot-password"
-                style={{ fontSize: '12px', color: 'var(--primary)', textDecoration: 'none' }}
+                style={{ fontSize: '12px', color: 'var(--accent)', textDecoration: 'none' }}
               >
                 Forgot password?
               </Link>
@@ -92,7 +92,7 @@ export const CustomerLoginPage: React.FC = () => {
             style={{ width: '100%', marginTop: '8px' }}
             disabled={submitting}
           >
-            {submitting ? 'Signing in...' : 'Sign in to Customer Portal'}
+            {submitting ? 'Signing in...' : 'Sign in'}
           </button>
         </form>
 
@@ -105,7 +105,7 @@ export const CustomerLoginPage: React.FC = () => {
             color: 'var(--text-secondary)',
           }}
         >
-          <div style={{ marginBottom: '8px', fontWeight: 600 }}>Quick Demo Accounts:</div>
+          <div style={{ marginBottom: '8px', fontWeight: 600 }}>Demo Customer Accounts:</div>
           <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
             <button
               type="button"
@@ -115,7 +115,7 @@ export const CustomerLoginPage: React.FC = () => {
                 setPassword('Customer@2026!');
               }}
             >
-              Acme Ltd (billing@acme.test)
+              Acme Ltd
             </button>
             <button
               type="button"
@@ -125,7 +125,7 @@ export const CustomerLoginPage: React.FC = () => {
                 setPassword('Customer@2026!');
               }}
             >
-              Kite Stores (asha@kite.test)
+              Kite Stores
             </button>
           </div>
         </div>
@@ -135,17 +135,17 @@ export const CustomerLoginPage: React.FC = () => {
             marginTop: '18px',
             display: 'flex',
             justifyContent: 'space-between',
-            fontSize: '13px',
+            fontSize: '12.5px',
           }}
         >
           <span>
             New customer?{' '}
-            <Link to="/signup" style={{ color: 'var(--primary)', fontWeight: 600 }}>
-              Create an account
+            <Link to="/signup" style={{ color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>
+              Create account
             </Link>
           </span>
-          <Link to="/staff/login" style={{ color: 'var(--text-muted)' }}>
-            Staff Console →
+          <Link to="/staff/login" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>
+            Staff Login
           </Link>
         </div>
       </div>

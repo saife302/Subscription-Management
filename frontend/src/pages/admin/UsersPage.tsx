@@ -185,7 +185,7 @@ export const UsersPage: React.FC = () => {
               downloadCsvWithAuth('/users/import/template', 'sample-users-template.csv')
             }
           >
-            ⬇ Sample CSV
+            Sample CSV
           </button>
           <button
             className="btn btn-secondary"
@@ -195,7 +195,7 @@ export const UsersPage: React.FC = () => {
               setImportOpen(true);
             }}
           >
-            📤 Bulk Import (CSV)
+            Bulk Import (CSV)
           </button>
           <button className="btn btn-primary" onClick={() => setCreateOpen(true)}>
             + New Staff / Admin User
@@ -346,7 +346,7 @@ export const UsersPage: React.FC = () => {
               required
               value={newEmail}
               onChange={(e) => setNewEmail(e.target.value)}
-              placeholder="riya@brightloop.test"
+              placeholder="riya@company.com"
             />
           </div>
           <div className="form-row">
@@ -394,7 +394,7 @@ export const UsersPage: React.FC = () => {
       {/* Reset Password Modal */}
       <Modal
         open={Boolean(resetUser)}
-        title={`Reset Password — ${resetUser?.name}`}
+        title={`Reset Password - ${resetUser?.name}`}
         onClose={() => setResetUser(null)}
       >
         <form onSubmit={handleResetPassword}>
@@ -509,7 +509,7 @@ export const UsersPage: React.FC = () => {
                       <td className="mono">{r.row}</td>
                       <td>{r.name}</td>
                       <td className="mono">{r.email}</td>
-                      <td>{r.role || '—'}</td>
+                      <td>{r.role || '-'}</td>
                       <td>
                         <StatusBadge status={r.status} />
                       </td>
