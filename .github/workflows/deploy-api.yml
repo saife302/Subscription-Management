@@ -1,0 +1,36 @@
+name: Deploy API
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create deployment package
+        working-directory: ./backend
+        run: |
+          zip -r ../deploy.zip src package.json package-lock.json Procfile .platform
+      - name: Configure AWS credentials
+        if: env.AWS_ROLE_ARN != ''
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ap-south-1
+      - name: Deploy to Elastic Beanstalk
+        if: env.AWS_ROLE_ARN != ''
+        uses: einaregilsson/beanstalk-deploy@v22
+        with:
+          application_name: brightloop-api
+          environment_name: brightloop-api-prod
+          version_label: ${{ github.sha }}
+          region: ap-south-1
+          deployment_package: deploy.zip
+          wait_for_environment_recovery: 180

@@ -1,0 +1,248 @@
+{
+  "info": {
+    "name": "Brightloop API v1",
+    "_postman_id": "6721f0c2-a1b2-c3d4-e5f6-071800000001",
+    "description": "Brightloop Subscription Management API Collection (Contract First v1)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:4000/api/v1" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health & Meta",
+      "item": [
+        {
+          "name": "GET /health",
+          "request": { "method": "GET", "url": "{{baseUrl}}/health" }
+        },
+        {
+          "name": "GET /meta",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/meta"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "POST /auth/customer/signup",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Asha Rao\",\"companyName\":\"Kite Stores\",\"email\":\"new@kite.test\",\"password\":\"Kite@2026!\"}"
+            },
+            "url": "{{baseUrl}}/auth/customer/signup"
+          }
+        },
+        {
+          "name": "POST /auth/customer/login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"asha@kite.test\",\"password\":\"Customer@2026!\"}"
+            },
+            "url": "{{baseUrl}}/auth/customer/login"
+          }
+        },
+        {
+          "name": "POST /auth/staff/login (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"admin@brightloop.test\",\"password\":\"Admin@2026!\"}"
+            },
+            "url": "{{baseUrl}}/auth/staff/login"
+          }
+        },
+        {
+          "name": "GET /auth/me",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/auth/me"
+          }
+        },
+        {
+          "name": "POST /auth/change-password",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"currentPassword\":\"Welcome@2026!\",\"newPassword\":\"NewPass@2026!\"}"
+            },
+            "url": "{{baseUrl}}/auth/change-password"
+          }
+        },
+        {
+          "name": "POST /auth/forgot-password",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"meera@brightloop.test\",\"portal\":\"staff\"}"
+            },
+            "url": "{{baseUrl}}/auth/forgot-password"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Catalog (Products, Plans, Templates)",
+      "item": [
+        {
+          "name": "GET /products",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/products"
+          }
+        },
+        {
+          "name": "GET /plans",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/plans"
+          }
+        },
+        {
+          "name": "GET /quotation-templates",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/quotation-templates"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin Config (Taxes, Discounts, Users)",
+      "item": [
+        {
+          "name": "GET /taxes",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/taxes"
+          }
+        },
+        {
+          "name": "GET /discounts",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/discounts"
+          }
+        },
+        {
+          "name": "GET /users",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/users"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers & Subscriptions",
+      "item": [
+        {
+          "name": "GET /customers",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/customers"
+          }
+        },
+        {
+          "name": "GET /subscriptions",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/subscriptions"
+          }
+        },
+        {
+          "name": "GET /subscriptions/:id (Test Case 1)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/subscriptions/6721f0c2a1b2c3d4e5f60760"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Billing, Invoices & Payments",
+      "item": [
+        {
+          "name": "POST /billing/run (dryRun)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"dryRun\":true}" },
+            "url": "{{baseUrl}}/billing/run"
+          }
+        },
+        {
+          "name": "GET /invoices",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/invoices"
+          }
+        },
+        {
+          "name": "GET /payments",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/payments"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reports & Portal",
+      "item": [
+        {
+          "name": "GET /reports/summary",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/reports/summary"
+          }
+        },
+        {
+          "name": "GET /portal/summary",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/portal/summary"
+          }
+        }
+      ]
+    }
+  ]
+}

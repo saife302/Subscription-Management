@@ -1,0 +1,17 @@
+{
+  "name": "subnex",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SubNex Subscription & Billing Management Monorepo",
+  "scripts": {
+    "start": "npm --prefix backend start",
+    "dev": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "seed": "npm --prefix backend run seed",
+    "test": "npm --prefix backend test",
+    "test:e2e": "node --test tests/e2e/demo-flow.test.js",
+    "docker:up": "docker compose -f infrastructure/docker-compose.yml up -d --build",
+    "docker:down": "docker compose -f infrastructure/docker-compose.yml down"
+  }
+}
