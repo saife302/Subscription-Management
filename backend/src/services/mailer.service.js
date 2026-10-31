@@ -1,17 +1,18 @@
-﻿const config = require('../config/index.js');
+const config = require('../config/index.js');
 
 const sentEmailsLog = [];
 
 async function sendViaBrevo({ toEmail, toName, templateId, params, subject, htmlContent }) {
+  sentEmailsLog.push({
+    toEmail,
+    toName,
+    templateId,
+    params,
+    subject,
+    sentAt: new Date().toISOString(),
+  });
+
   if (config.emailProvider === 'console' || !config.brevoApiKey) {
-    sentEmailsLog.push({
-      toEmail,
-      toName,
-      templateId,
-      params,
-      subject,
-      sentAt: new Date().toISOString(),
-    });
     if (process.env.NODE_ENV !== 'test') {
       console.log(
         `[Mailer:console] To=${toEmail} Subject="${subject}"`,
@@ -51,6 +52,10 @@ async function sendViaBrevo({ toEmail, toName, templateId, params, subject, html
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       console.error('[Mailer:brevo] Failed sending email:', res.status, data);
+      console.log(
+        `[Mailer:fallback-console] To=${toEmail} Subject="${subject}"`,
+        params?.resetUrl ? `ResetURL=${params.resetUrl}` : ''
+      );
       return null;
     }
     console.log('[Mailer:brevo] Sent messageId:', data.messageId);

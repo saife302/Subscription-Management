@@ -40,12 +40,26 @@ async function initDb() {
   }
 
   if (!pool) {
+    const rawUrl = config.databaseUrl || '';
+    const needsSsl =
+      config.dbSsl ||
+      rawUrl.includes('sslmode=require') ||
+      rawUrl.includes('sslmode=no-verify') ||
+      rawUrl.includes('rds.amazonaws.com') ||
+      rawUrl.includes('neon.tech');
+    let cleanUrl = rawUrl;
+    try {
+      const parsed = new URL(rawUrl);
+      parsed.searchParams.delete('sslmode');
+      parsed.searchParams.delete('channel_binding');
+      cleanUrl = parsed.toString();
+    } catch (_) {}
     pool = new Pool({
-      connectionString: config.databaseUrl,
-      ssl: config.dbSsl ? { rejectUnauthorized: false } : false,
+      connectionString: cleanUrl,
+      ssl: needsSsl ? { rejectUnauthorized: false } : false,
       max: 20,
       idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 5000,
+      connectionTimeoutMillis: 10000,
     });
   }
 

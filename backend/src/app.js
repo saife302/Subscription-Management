@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const crypto = require('crypto');
 const helmet = require('helmet');
 const cors = require('cors');
@@ -64,6 +64,17 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 app.use(express.json({ limit: '2mb' }));
+
+// Root status endpoint
+app.get('/', (_req, res) => {
+  return res.status(200).json({
+    service: 'SubNex Subscription & Billing API',
+    status: 'running',
+    apiBase: '/api/v1',
+    health: '/api/v1/health',
+    meta: '/api/v1/meta',
+  });
+});
 
 // Mount API v1 routes
 app.use('/api/v1', healthRoutes);
