@@ -1,0 +1,5 @@
+name,email,temporary_password,access_level
+Ananya Roy,ananya@brightloop,Welcome@2026!,Internal Staff
+Devendra Singh,dev@brightloop.test,Welcome@2026!,Customer
+Karan Malhotra,karan@brightloop.test,Welcome@2026!,Internal Staff
+Karan Duplicate,KARAN@brightloop.test,Welcome@2026!,Finance Lead
